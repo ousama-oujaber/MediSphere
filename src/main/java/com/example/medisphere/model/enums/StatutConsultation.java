@@ -1,8 +1,5 @@
 package com.example.medisphere.model.enums;
 
-/**
- * Enum représentant les différents statuts d'une consultation
- */
 public enum StatutConsultation {
     RESERVEE("Réservée"),
     VALIDEE("Validée"),
@@ -19,9 +16,6 @@ public enum StatutConsultation {
         return label;
     }
 
-    /**
-     * Retourne l'enum à partir d'une chaîne
-     */
     public static StatutConsultation fromString(String text) {
         for (StatutConsultation statut : StatutConsultation.values()) {
             if (statut.name().equalsIgnoreCase(text)) {
