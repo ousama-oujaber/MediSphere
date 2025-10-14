@@ -4,7 +4,11 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+/**
+ * Entité représentant une salle de consultation
+ */
 @Entity
 @Table(name = "salle")
 public class Salle {
@@ -36,7 +40,7 @@ public class Salle {
     @OneToMany(mappedBy = "salle", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Consultation> consultations = new ArrayList<>();
 
-
+    // Constructeurs
     public Salle() {
     }
 
@@ -45,6 +49,23 @@ public class Salle {
         this.numeroEtage = numeroEtage;
         this.capacite = capacite;
         this.disponible = true;
+    }
+
+    // Lifecycle callbacks
+    @PrePersist
+    protected void onCreate() {
+        dateCreation = LocalDateTime.now();
+    }
+
+    // Méthodes utilitaires
+    public void addConsultation(Consultation consultation) {
+        consultations.add(consultation);
+        consultation.setSalle(this);
+    }
+
+    public void removeConsultation(Consultation consultation) {
+        consultations.remove(consultation);
+        consultation.setSalle(null);
     }
 
     // Getters et Setters
@@ -110,6 +131,20 @@ public class Salle {
 
     public void setConsultations(List<Consultation> consultations) {
         this.consultations = consultations;
+    }
+
+    // equals et hashCode basés sur nomSalle
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Salle salle = (Salle) o;
+        return Objects.equals(nomSalle, salle.nomSalle);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nomSalle);
     }
 
     @Override

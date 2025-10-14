@@ -2,6 +2,7 @@ package com.example.medisphere.model.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 
 @Entity
@@ -33,6 +34,7 @@ public class CreneauOccupe {
     @JoinColumn(name = "id_consultation", nullable = false)
     private Consultation consultation;
 
+    // Constructeurs
     public CreneauOccupe() {
     }
 
@@ -43,6 +45,12 @@ public class CreneauOccupe {
         this.consultation = consultation;
     }
 
+    // Méthode pour vérifier si un créneau chevauche un autre
+    public boolean chevauche(LocalDateTime debut, LocalDateTime fin) {
+        return (debut.isBefore(dateHeureFin) && fin.isAfter(dateHeureDebut));
+    }
+
+    // Getters et Setters
     public Long getIdCreneau() {
         return idCreneau;
     }
@@ -81,6 +89,20 @@ public class CreneauOccupe {
 
     public void setConsultation(Consultation consultation) {
         this.consultation = consultation;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CreneauOccupe that = (CreneauOccupe) o;
+        return Objects.equals(salle, that.salle) &&
+               Objects.equals(dateHeureDebut, that.dateHeureDebut);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(salle, dateHeureDebut);
     }
 
     @Override

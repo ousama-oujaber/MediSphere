@@ -4,6 +4,7 @@ import com.example.medisphere.model.enums.RoleUtilisateur;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 @Table(name = "personne")
@@ -49,10 +50,11 @@ public class Personne {
     @Column(name = "actif")
     private Boolean actif = true;
 
-    protected Personne() {
+    // Constructeurs
+    public Personne() {
     }
 
-    protected Personne(RoleUtilisateur typePersonne, String nom, String prenom, String email, String motDePasse) {
+    public Personne(RoleUtilisateur typePersonne, String nom, String prenom, String email, String motDePasse) {
         this.typePersonne = typePersonne;
         this.nom = nom;
         this.prenom = prenom;
@@ -61,10 +63,24 @@ public class Personne {
         this.actif = true;
     }
 
+    // Lifecycle callbacks
+    @PrePersist
+    protected void onCreate() {
+        dateCreation = LocalDateTime.now();
+        dateModification = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        dateModification = LocalDateTime.now();
+    }
+
+    // Méthode utilitaire pour obtenir le nom complet
     public String getNomComplet() {
         return prenom + " " + nom;
     }
 
+    // Getters et Setters
     public Long getIdPersonne() {
         return idPersonne;
     }
@@ -159,6 +175,20 @@ public class Personne {
 
     public void setActif(Boolean actif) {
         this.actif = actif;
+    }
+
+    // equals et hashCode basés sur l'email (clé métier naturelle)
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Personne personne = (Personne) o;
+        return Objects.equals(email, personne.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(email);
     }
 
     @Override

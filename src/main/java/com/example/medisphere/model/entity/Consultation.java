@@ -5,7 +5,11 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Objects;
 
+/**
+ * Entité représentant une consultation médicale
+ */
 @Entity
 @Table(
     name = "consultation",
@@ -75,6 +79,7 @@ public class Consultation {
     @JoinColumn(name = "id_salle", nullable = false)
     private Salle salle;
 
+    // Constructeurs
     public Consultation() {
     }
 
@@ -84,10 +89,51 @@ public class Consultation {
         this.motifConsultation = motifConsultation;
         this.statut = StatutConsultation.RESERVEE;
         
+        // Calcul automatique de dateHeureDebut et dateHeureFin (30 minutes)
         this.dateHeureDebut = LocalDateTime.of(dateConsultation, heureConsultation);
         this.dateHeureFin = this.dateHeureDebut.plusMinutes(30);
     }
 
+    // Lifecycle callbacks
+    @PrePersist
+    protected void onCreate() {
+        dateCreation = LocalDateTime.now();
+        dateModification = LocalDateTime.now();
+        
+        // S'assurer que dateHeureDebut et dateHeureFin sont définis
+        if (dateHeureDebut == null && dateConsultation != null && heureConsultation != null) {
+            dateHeureDebut = LocalDateTime.of(dateConsultation, heureConsultation);
+            dateHeureFin = dateHeureDebut.plusMinutes(30);
+        }
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        dateModification = LocalDateTime.now();
+    }
+
+    // Méthodes métier
+    public boolean estTerminee() {
+        return statut == StatutConsultation.TERMINEE;
+    }
+
+    public boolean estAnnulee() {
+        return statut == StatutConsultation.ANNULEE;
+    }
+
+    public boolean estValidee() {
+        return statut == StatutConsultation.VALIDEE;
+    }
+
+    public boolean estReservee() {
+        return statut == StatutConsultation.RESERVEE;
+    }
+
+    public boolean peutEtreModifiee() {
+        return statut == StatutConsultation.RESERVEE || statut == StatutConsultation.VALIDEE;
+    }
+
+    // Getters et Setters
     public Long getIdConsultation() {
         return idConsultation;
     }
@@ -214,6 +260,20 @@ public class Consultation {
 
     public void setSalle(Salle salle) {
         this.salle = salle;
+    }
+
+    // equals et hashCode
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Consultation that = (Consultation) o;
+        return Objects.equals(idConsultation, that.idConsultation);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idConsultation);
     }
 
     @Override

@@ -14,6 +14,7 @@
         <class>com.example.medisphere.model.entity.Departement</class>
         <class>com.example.medisphere.model.entity.Salle</class>
         <class>com.example.medisphere.model.entity.Consultation</class>
+        <class>com.example.medisphere.model.entity.CreneauOccupe</class>
         
         <properties>
             <!-- Database connection properties -->
