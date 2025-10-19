@@ -66,7 +66,7 @@
                     <i class="fas fa-arrow-left mr-2"></i>Retour à la liste
                 </a>
             </div>
-        </div>omplete consultation management (8-10h)
+    </div>
 
         <!-- Error Messages -->
         <c:if test="${not empty errorMessage}">

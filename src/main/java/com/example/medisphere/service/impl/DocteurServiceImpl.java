@@ -92,6 +92,14 @@ public class DocteurServiceImpl implements IDocteurService {
     }
 
     @Override
+    public Optional<Docteur> getDocteurByEmail(String email) {
+        if (email == null || email.trim().isEmpty()) {
+            throw new IllegalArgumentException("Email cannot be empty");
+        }
+        return docteurRepository.findByEmail(email);
+    }
+
+    @Override
     public boolean emailExists(String email) {
         if (email == null || email.trim().isEmpty()) {
             return false;

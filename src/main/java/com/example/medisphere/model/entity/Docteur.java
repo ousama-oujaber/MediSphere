@@ -46,7 +46,7 @@ public class Docteur {
     @OneToMany(mappedBy = "docteur", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     private List<Consultation> consultations = new ArrayList<>();
 
-    // Constructeurs
+    
     public Docteur() {
     }
 
@@ -65,7 +65,7 @@ public class Docteur {
         this.disponible = true;
     }
 
-    // Méthodes utilitaires pour les relations bidirectionnelles
+    
     public void addConsultation(Consultation consultation) {
         consultations.add(consultation);
         consultation.setDocteur(this);
@@ -76,7 +76,7 @@ public class Docteur {
         consultation.setDocteur(null);
     }
 
-    // Getters et Setters
+    
     public Long getIdDocteur() {
         return idDocteur;
     }
@@ -93,7 +93,7 @@ public class Docteur {
         this.personne = personne;
     }
 
-    // Méthodes de délégation pour accéder facilement aux données de Personne
+    
     public String getNom() {
         return personne != null ? personne.getNom() : null;
     }

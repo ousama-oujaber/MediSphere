@@ -6,9 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * Entité représentant un département médical de la clinique
- */
+ 
 @Entity
 @Table(name = "departement")
 public class Departement {
@@ -31,7 +29,7 @@ public class Departement {
     @OneToMany(mappedBy = "departement", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Docteur> docteurs = new ArrayList<>();
 
-    // Constructeurs
+    
     public Departement() {
     }
 
@@ -40,13 +38,13 @@ public class Departement {
         this.description = description;
     }
 
-    // Lifecycle callbacks
+    
     @PrePersist
     protected void onCreate() {
         dateCreation = LocalDateTime.now();
     }
 
-    // Méthodes utilitaires pour les relations bidirectionnelles
+    
     public void addDocteur(Docteur docteur) {
         docteurs.add(docteur);
         docteur.setDepartement(this);
@@ -57,7 +55,7 @@ public class Departement {
         docteur.setDepartement(null);
     }
 
-    // Getters et Setters
+    
     public Long getIdDepartement() {
         return idDepartement;
     }
@@ -98,7 +96,7 @@ public class Departement {
         this.docteurs = docteurs;
     }
 
-    // equals et hashCode basés sur le nom (clé métier)
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

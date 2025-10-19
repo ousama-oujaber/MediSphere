@@ -34,7 +34,7 @@ public class CreneauOccupe {
     @JoinColumn(name = "id_consultation", nullable = false)
     private Consultation consultation;
 
-    // Constructeurs
+    
     public CreneauOccupe() {
     }
 
@@ -45,12 +45,12 @@ public class CreneauOccupe {
         this.consultation = consultation;
     }
 
-    // Méthode pour vérifier si un créneau chevauche un autre
+    
     public boolean chevauche(LocalDateTime debut, LocalDateTime fin) {
         return (debut.isBefore(dateHeureFin) && fin.isAfter(dateHeureDebut));
     }
 
-    // Getters et Setters
+    
     public Long getIdCreneau() {
         return idCreneau;
     }

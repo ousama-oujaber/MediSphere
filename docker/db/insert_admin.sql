@@ -117,3 +117,8 @@ ORDER BY date_creation;
 SELECT '===================================================' AS '';
 SELECT 'NOTE: Please change the default password after first login!' AS '';
 SELECT '===================================================' AS '';
+SELECT '' AS '';
+SELECT 'For testing with easy-to-remember credentials,' AS '';
+SELECT 'you can also run: fake_data_login.sql' AS '';
+SELECT 'This creates test accounts for Admin, Doctor, and Patient roles' AS '';
+SELECT 'with simple passwords like admin123, doctor123, patient123' AS '';

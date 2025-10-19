@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourcePerFileMappings">
-    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/40ad626a-313e-4e5d-85a1-d556396d5681/console.sql" value="40ad626a-313e-4e5d-85a1-d556396d5681" />
     <file url="file://$PROJECT_DIR$/docker/db/init.sql" value="40ad626a-313e-4e5d-85a1-d556396d5681" />
   </component>
 </project>

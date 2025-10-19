@@ -110,7 +110,7 @@ public class DocteurRepositoryImpl implements IDocteurRepository {
         try {
             em.getTransaction().begin();
             
-            // Soft delete - mark personne as inactive
+            
             Docteur docteur = em.find(Docteur.class, id);
             if (docteur != null && docteur.getPersonne() != null) {
                 docteur.getPersonne().setActif(false);

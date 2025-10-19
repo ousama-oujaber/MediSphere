@@ -6,9 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * Entité représentant une salle de consultation
- */
+ 
 @Entity
 @Table(name = "salle")
 public class Salle {
@@ -40,7 +38,7 @@ public class Salle {
     @OneToMany(mappedBy = "salle", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Consultation> consultations = new ArrayList<>();
 
-    // Constructeurs
+    
     public Salle() {
     }
 
@@ -51,13 +49,13 @@ public class Salle {
         this.disponible = true;
     }
 
-    // Lifecycle callbacks
+    
     @PrePersist
     protected void onCreate() {
         dateCreation = LocalDateTime.now();
     }
 
-    // Méthodes utilitaires
+    
     public void addConsultation(Consultation consultation) {
         consultations.add(consultation);
         consultation.setSalle(this);
@@ -68,7 +66,7 @@ public class Salle {
         consultation.setSalle(null);
     }
 
-    // Getters et Setters
+    
     public Long getIdSalle() {
         return idSalle;
     }
@@ -133,7 +131,7 @@ public class Salle {
         this.consultations = consultations;
     }
 
-    // equals et hashCode basés sur nomSalle
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

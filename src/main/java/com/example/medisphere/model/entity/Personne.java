@@ -50,7 +50,7 @@ public class Personne {
     @Column(name = "actif")
     private Boolean actif = true;
 
-    // Constructeurs
+    
     public Personne() {
     }
 
@@ -63,7 +63,7 @@ public class Personne {
         this.actif = true;
     }
 
-    // Lifecycle callbacks
+    
     @PrePersist
     protected void onCreate() {
         dateCreation = LocalDateTime.now();
@@ -75,12 +75,12 @@ public class Personne {
         dateModification = LocalDateTime.now();
     }
 
-    // Méthode utilitaire pour obtenir le nom complet
+    
     public String getNomComplet() {
         return prenom + " " + nom;
     }
 
-    // Getters et Setters
+    
     public Long getIdPersonne() {
         return idPersonne;
     }
@@ -177,7 +177,7 @@ public class Personne {
         this.actif = actif;
     }
 
-    // equals et hashCode basés sur l'email (clé métier naturelle)
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

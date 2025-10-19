@@ -7,9 +7,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Objects;
 
-/**
- * Entité représentant une consultation médicale
- */
+ 
 @Entity
 @Table(
     name = "consultation",
@@ -79,7 +77,7 @@ public class Consultation {
     @JoinColumn(name = "id_salle", nullable = false)
     private Salle salle;
 
-    // Constructeurs
+    
     public Consultation() {
     }
 
@@ -89,18 +87,18 @@ public class Consultation {
         this.motifConsultation = motifConsultation;
         this.statut = StatutConsultation.RESERVEE;
         
-        // Calcul automatique de dateHeureDebut et dateHeureFin (30 minutes)
+        
         this.dateHeureDebut = LocalDateTime.of(dateConsultation, heureConsultation);
         this.dateHeureFin = this.dateHeureDebut.plusMinutes(30);
     }
 
-    // Lifecycle callbacks
+    
     @PrePersist
     protected void onCreate() {
         dateCreation = LocalDateTime.now();
         dateModification = LocalDateTime.now();
         
-        // S'assurer que dateHeureDebut et dateHeureFin sont définis
+        
         if (dateHeureDebut == null && dateConsultation != null && heureConsultation != null) {
             dateHeureDebut = LocalDateTime.of(dateConsultation, heureConsultation);
             dateHeureFin = dateHeureDebut.plusMinutes(30);
@@ -112,7 +110,7 @@ public class Consultation {
         dateModification = LocalDateTime.now();
     }
 
-    // Méthodes métier
+    
     public boolean estTerminee() {
         return statut == StatutConsultation.TERMINEE;
     }
@@ -133,7 +131,7 @@ public class Consultation {
         return statut == StatutConsultation.RESERVEE || statut == StatutConsultation.VALIDEE;
     }
 
-    // Getters et Setters
+    
     public Long getIdConsultation() {
         return idConsultation;
     }
@@ -262,7 +260,7 @@ public class Consultation {
         this.salle = salle;
     }
 
-    // equals et hashCode
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

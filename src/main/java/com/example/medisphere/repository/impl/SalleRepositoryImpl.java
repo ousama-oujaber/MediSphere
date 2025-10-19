@@ -173,7 +173,7 @@ public class SalleRepositoryImpl implements ISalleRepository {
             totalQuery.setParameter("dateFin", dateFin);
             
             long occupiedSlots = totalQuery.getSingleResult();
-            // Assuming 8 hours per day, 8 slots per day
+            
             long totalSlots = java.time.Duration.between(dateDebut, dateFin).toDays() * 8;
             
             return totalSlots > 0 ? (double) occupiedSlots / totalSlots * 100 : 0;

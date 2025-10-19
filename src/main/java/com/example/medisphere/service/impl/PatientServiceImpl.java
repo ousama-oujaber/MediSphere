@@ -19,7 +19,7 @@ public class PatientServiceImpl implements IPatientService {
         this.patientRepository = patientRepository;
     }
     
-    // ===== register =====
+    
 
     @Override
     public Patient registerPatient(String nom, String prenom, String email, String motDePasse, String telephone) {
@@ -66,7 +66,7 @@ public class PatientServiceImpl implements IPatientService {
         return patientRepository.count();
     }
     
-    // ===== admin management =====
+    
     
     @Override
     public List<Patient> getAllPatients() {
@@ -228,7 +228,7 @@ public class PatientServiceImpl implements IPatientService {
         return "PAT-" + System.currentTimeMillis() + "-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
     }
     
-    // ===== private methods =====
+    
 
     private void validateRegistrationData(String nom, String prenom, String email, String motDePasse) {
         if (nom == null || nom.trim().isEmpty()) {

@@ -6,9 +6,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Entité représentant un patient
- */
+ 
 @Entity
 @Table(name = "patient")
 public class Patient {
@@ -45,7 +43,7 @@ public class Patient {
     @OneToMany(mappedBy = "patient", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     private List<Consultation> consultations = new ArrayList<>();
 
-    // Constructeurs
+    
     public Patient() {
     }
 
@@ -60,7 +58,7 @@ public class Patient {
         this.personne = new Personne(RoleUtilisateur.PATIENT, nom, prenom, email, motDePasse);
     }
 
-    // Méthodes utilitaires pour les relations bidirectionnelles
+    
     public void addConsultation(Consultation consultation) {
         consultations.add(consultation);
         consultation.setPatient(this);
@@ -71,7 +69,7 @@ public class Patient {
         consultation.setPatient(null);
     }
 
-    // Méthode pour calculer l'IMC
+    
     public BigDecimal calculerIMC() {
         if (poids != null && taille != null && taille.compareTo(BigDecimal.ZERO) > 0) {
             BigDecimal tailleEnMetres = taille.divide(new BigDecimal("100"), 2, java.math.RoundingMode.HALF_UP);
@@ -80,7 +78,7 @@ public class Patient {
         return null;
     }
 
-    // Getters et Setters
+    
     public Long getIdPatient() {
         return idPatient;
     }
@@ -97,7 +95,7 @@ public class Patient {
         this.personne = personne;
     }
 
-    // Méthodes de délégation pour accéder facilement aux données de Personne
+    
     public String getNom() {
         return personne != null ? personne.getNom() : null;
     }
